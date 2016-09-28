@@ -1,0 +1,28 @@
+h1 アイテムリスト
+- if @itemset.favorited_by? current_user
+  = 'お気に入り登録されています'
+<br>
+- if @itemset.private
+  = "非公開です"
+- else
+  = "公開されています"
+h3
+  = @itemset.title
+p
+  = @itemset.content
+p  
+  = @itemset.champion
+  
+/img src="#{"http://ddragon.leagueoflegends.com/cdn/"+ $version +"/img/item/" + $item['data'][@itemset.item0_id]['image']['full']}"
+
+p 
+  = link_to "自分のアイテムリスト一覧に戻る", itemsets_path
+  <br />
+  
+  - if @itemset.favorited_by? current_user
+    = link_to "お気に入りの解除", itemset_favorite_path(@itemset), method: :delete
+  - else
+    = link_to "お気に入りの登録", itemset_favorites_path(@itemset), method: :post
+p
+  - if @itemset.user_id == current_user.id
+    = link_to "削除", itemset_path(@itemset), method: :delete, data: {confirm: "本当に削除しますか？"}

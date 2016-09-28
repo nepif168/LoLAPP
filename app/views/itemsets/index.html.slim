@@ -1,0 +1,10 @@
+h1 アイテムセット一覧
+
+- @itemsets.each do |itemset|
+  li 
+    =link_to itemset.title, itemset_path(itemset)
+    
+p 
+  = link_to "アイテムセットを作る", new_itemset_path    
+
+= link_to "ホームに戻る", root_path

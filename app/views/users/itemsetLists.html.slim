@@ -1,0 +1,14 @@
+h1 あなたの作ったアイテムセット一覧
+
+- @itemsets.each do |itemset|
+  li 
+    =link_to itemset.title, itemset_path(itemset)
+    
+p 
+  = link_to "アイテムセットを作る", new_itemset_path    
+p 
+  = link_to "お気に入り一覧", favorites_user_path(current_user)
+p 
+  = link_to "すべてのアイテムセットを見る", itemsets_path
+
+= link_to "ホームに戻る", root_path

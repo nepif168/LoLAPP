@@ -1,0 +1,25 @@
+h1 アイテムセットを作る
+
+= form_for @itemset do |f|
+  p 
+    =f.label "タイトル"
+    =f.text_field :title
+  p 
+    =f.label "コメント"
+    =f.text_area :content
+  p 
+    =f.label "チャンピオン名"
+    =f.text_field :champion
+  p 
+    =f.label "アイテムid"
+  =f.text_field :item0_id
+  =f.text_field :item1_id
+  =f.text_field :item2_id
+  =f.text_field :item3_id
+  =f.text_field :item4_id
+  =f.text_field :item5_id
+  
+  p 
+    =f.label "非公開"
+    =f.check_box :private
+  =f.submit

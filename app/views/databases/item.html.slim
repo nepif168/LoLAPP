@@ -1,0 +1,29 @@
+- notExistItem = ['1302', '1303', '1307', '1308', '1312', '1313', '1317', '1318', '1322', '1323', '1327', '1328', '1332', '1333', '1332', '3290', '3717', '3718', '3722', '3725']
+
+
+h1 アイテムリスト
+
+- $item['data'].each_key do |key|
+  - if $item['data'][key]['maps']['11']
+    h3 #{$item['data'][key]['name']}
+    p <img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+key+".png"}" alt="#{key}" width="64px">
+    p #{$item['data'][key]['description'].html_safe} 
+    <hr>
+
+/- $item['data'].each_key do |key|
+/    - if $item['data'][key]['maps']['11']
+/        <p id="#{key}"><strong> #{$item['data'][key]['name']} </strong></p>
+/        p <img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$realms['v']+"/img/item/"+key+".png"}" alt="#{key}" width="64px">
+/        p #{$item['data'][key]['description'].html_safe} 
+/        p 金額: #{$item['data'][key]['gold']['total']}G
+/        p 派生先
+/        - if $item['data'][key]['into'].empty?
+/            p 派生先なし
+/        - Array($item['data'][key]['into']).each do |key2|
+/            - unless notExistItem.include?(key2)
+/                - if $item['data'][key2]['maps']['11']
+/                    <a href="##{key2}"><img src="#{"http://ddragon.leagueoflegends.com/cdn/"+@realms['v']+"/img/item/"+key2+".png"}" alt="#{key2}" width="64px"></a>
+/        puts <br>タグ:  
+/        - $item['data'][key]['tags'].each do |tag|
+/           puts #{tag} 
+/        p <hr>
