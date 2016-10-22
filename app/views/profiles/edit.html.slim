@@ -1,0 +1,23 @@
+div class="form-horizontal" role="form"
+  = form_for @profile, :url => {:action => :update} do |f|
+    div class="form-group"
+      =f.label "SummonerName"
+      =f.text_field :summoner_name, class: "form-control"
+    
+    div class="form-group"
+      =f.label "誕生日"
+      =f.date_select :birthday, start_year: 1950, use_month_numbers: true, class: "form-control"
+  
+    div class="form-group"
+      =f.label "自己紹介"
+      =f.text_area :content, class: "form-control", rows: "3"
+        
+    div class="form-group"
+      =f.label "TwitterのURL"
+      =f.url_field :twitter_url, class: "form-control"
+    div class="form-group"
+      =f.label "FacebookのURL"
+      =f.url_field :facebook_url, class: "form-control"
+    div class="form-group"
+      =f.submit class: "btn btn-info"
+  

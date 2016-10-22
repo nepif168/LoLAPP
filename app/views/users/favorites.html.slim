@@ -1,6 +1,6 @@
 h1 お気に入り一覧
 
 
--@user.favorites.each do |f|
+-@user.favorites.map { |f| f.itemset }.each do |itemset|
   li
-    =link_to f.title, itemset_path(f.itemset_id)
+    =link_to itemset.title, itemset_path(itemset)

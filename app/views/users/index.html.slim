@@ -1,19 +1,36 @@
-- if user_signed_in?  
-  =image_tag current_user.user_image
-  h3
-    = current_user.user_name
+
+div class="row"
+  /画像と名前のボックス
+  div class="col-md-3"
+    div class="thumbnail"
+      =image_tag current_user.user_image
+      hr style="margin:3px"
+      div class="caption bg-success"
+        h4 class="text-center" #{current_user.user_name}
     
-  <br />  
-  p
-    = link_to "アイテムセット", itemsetLists_user_path(current_user)
-  p 
-    = link_to "データベース", databases_path
-  p 
-    = link_to "設定", edit_user_registration_path, :class => "navbar-link"
-  p 
-    = link_to "ログアウト", destroy_user_session_path, method: :delete, :class => "navbar-link"
-    
-  p 現在のLoLのバージョンは#{$version}です
-- else
-  = link_to "新規登録", new_user_registration_path, :class => 'navbar-link'
-  = link_to "ログイン", new_user_session_path, :class => 'navbar-link'
+    =link_to user_path(current_user), class: "btn btn-default" do
+      span class="glyphicon glyphicon-user"
+        |プロフィールの確認
+      
+  
+  /自分の作ったアイテムセット
+  div class="col-md-9"
+    div class="panel panel-info"
+      div class="panel-heading" style="padding:5px"
+        h4 class="text-center" 自分の作ったアイテムセット
+      table class="table table-striped"
+        tr
+          th タイトル
+          th 最終更新日
+          th 
+        - @itemsets.each do |itemset|
+          tr
+            td #{itemset.title}
+            td #{itemset.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M')}
+            td
+              =link_to "確認する", itemset_path(itemset), class: "btn btn-primary btn-xs"
+    =link_to "...more", itemsetLists_user_path(current_user), class: "pull-right"
+  
+
+hr  
+p 現在のLoLのバージョンは#{$version}です

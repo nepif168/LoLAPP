@@ -1,25 +1,33 @@
 h1 アイテムセットを作る
 
-= form_for @itemset do |f|
-  p 
-    =f.label "タイトル"
-    =f.text_field :title
-  p 
-    =f.label "コメント"
-    =f.text_area :content
-  p 
-    =f.label "チャンピオン名"
-    =f.text_field :champion
-  p 
-    =f.label "アイテムid"
-  =f.text_field :item0_id
-  =f.text_field :item1_id
-  =f.text_field :item2_id
-  =f.text_field :item3_id
-  =f.text_field :item4_id
-  =f.text_field :item5_id
+=form_tag itemsets_path(@itemset), method: :post do
+  div class="form-group"
+    =label_tag "タイトル"
+    =text_field_tag :title
   
-  p 
-    =f.label "非公開"
-    =f.check_box :private
-  =f.submit
+  div class="form-group"
+    =label_tag "説明"
+    =text_area_tag :content
+    
+  div class="form-group"
+    =link_to "チャンピオンを選ぶ", itemsets_path, class: "btn btn-default"
+  =hidden_field_tag :champion, @itemset.id
+  - if @item0_id.blank?
+    div class="form-group"
+      =link_to "アイテムを選ぶ", itemsets_path, class: "btn btn-default"
+  - else
+    div class="form-group"
+      =link_to "アイテムを選び直す", itemsets_path, class: "btn btn-default"
+  =hidden_field_tag :item0_id
+  =hidden_field_tag :item1_id
+  =hidden_field_tag :item2_id
+  =hidden_field_tag :item3_id
+  =hidden_field_tag :item4_id
+  =hidden_field_tag :item5_id
+  
+  div class="form-group"
+    =label_tag "非公開"
+    =check_box_tag :private
+  
+  div class="form-group"
+    =submit_tag "作成する", class: "btn btn-info"

@@ -12,9 +12,10 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
+    @itemset = Itemset.find(params[:itemset_id])
     @favorite = current_user.favorites.find_by!(itemset_id: params[:itemset_id])
     @favorite.destroy
-    redirect_to itemsets_path
+    redirect_to itemset_path(@itemset)
   end
 
 end

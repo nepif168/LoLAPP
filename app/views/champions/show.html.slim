@@ -1,0 +1,68 @@
+div class="row"
+  div class="col-md-3"
+    div class="panel panel-warning" 
+      div class="panel-heading" style="padding:5px" 
+        h4 class="text-center" #{$champion['data'][@champion_name]['name']}
+      div class="panel-body" style="padding:2px"
+        center
+          |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+@champion_name+".png"}" width="100%">
+      div class="panel-footer" style="padding:10px"        
+        p style="float:left" 攻撃力:&nbsp;
+        div class="progress"
+          div class="progress-bar progress-bar-danger" role="progressbar" aria-valuemax="10" style="#{"width:"+$champion['data'][@champion_name]['info']['attack'].to_s+"0%"}"
+        
+        p style="float:left" 防御力:&nbsp;
+        div class="progress"
+          div class="progress-bar progress-bar-info" role="progressbar" aria-valuemax="10" style="#{"width:"+$champion['data'][@champion_name]['info']['defense'].to_s+"0%"}"
+          
+        p style="float:left" 魔力　:&nbsp;
+        div class="progress"
+          div class="progress-bar progress-bar-success" role="progressbar" aria-valuemax="10" style="#{"width:"+$champion['data'][@champion_name]['info']['magic'].to_s+"0%"}"
+            
+        p style="float:left" 難易度:&nbsp;
+        div class="progress"
+          div class="progress-bar progress-bar-warning" role="progressbar" aria-valuemax="10" style="#{"width:"+$champion['data'][@champion_name]['info']['difficulty'].to_s+"0%"}"
+          
+  
+  div class="col-md-8"
+    div class="panel panel-info"
+      div class="panel-heading" style="padding:5px"
+        h4 class="text-center" スキル
+      table class="table table-bordered"
+        tbody
+          tr 
+            td 
+              |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/passive/"+$champion_passive['data'][@champion_name]['passive']['image']['full']}" width="64px">
+              h5 #{$champion_passive['data'][@champion_name]['passive']['name']}
+            td 
+              = $champion_passive['data'][@champion_name]['passive']['description'].html_safe
+          tr
+            td
+              |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/spell/"+$champion_spell['data'][@champion_name]['spells'][0]['image']['full']}" width="64px">
+              p #{$champion_spell['data'][@champion_name]['spells'][0]['name']}
+            td 
+              p #{spell_convert(0).html_safe}
+              p <br>CD: #{$champion_spell['data'][@champion_name]['spells'][0]['cooldownBurn']}秒
+          tr
+            td
+              |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/spell/"+$champion_spell['data'][@champion_name]['spells'][1]['image']['full']}" width="64px">
+              p #{$champion_spell['data'][@champion_name]['spells'][1]['name']}
+            td 
+              = spell_convert(1).html_safe
+              p <br>CD: #{$champion_spell['data'][@champion_name]['spells'][0]['cooldownBurn']}秒
+          tr
+            td
+              |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/spell/"+$champion_spell['data'][@champion_name]['spells'][2]['image']['full']}" width="64px">
+              p #{$champion_spell['data'][@champion_name]['spells'][2]['name']}
+            td 
+              = spell_convert(2).html_safe
+              p <br>CD: #{$champion_spell['data'][@champion_name]['spells'][0]['cooldownBurn']}秒
+          tr
+            td
+              |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/spell/"+$champion_spell['data'][@champion_name]['spells'][3]['image']['full']}" width="64px">
+              p #{$champion_spell['data'][@champion_name]['spells'][3]['name']}
+            td 
+              = spell_convert(3).html_safe
+              p <br>CD: #{$champion_spell['data'][@champion_name]['spells'][0]['cooldownBurn']}秒
+              
+              

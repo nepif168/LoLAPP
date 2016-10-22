@@ -1,0 +1,15 @@
+= javascript_include_tag params[:controller]
+input type="text" value=""
+table class="table" id="TABLE1"
+  tbody
+    - $item['data'].each_key do |key|
+      -if $item['data'][key]['maps']['11']
+        tr
+          td
+            |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+$item['data'][key]['image']['full']}" width="64px">
+          td 
+            h4  #{$item['data'][key]['name']}
+            = $item['data'][key]['description'].html_safe
+            br
+            p タグ: #{tags(key)}
+          

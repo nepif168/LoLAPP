@@ -4,7 +4,6 @@ source 'https://rubygems.org'
 #---------CustomInstall---------#
 #devise
 gem 'devise'
-gem 'omniauth-twitter'
 #RailsAdmin
 gem 'rails-admin'
 #slim-rails
@@ -14,10 +13,11 @@ gem 'font-awesome-rails'
 #devise使うために必要っぽい なかったらエラー出た
 gem 'mysql2'
 
+
 #bootstrap関連
-gem 'therubyracer', platforms: :ruby # javascript runtime。lessをコンパイルするために必要
-gem 'less-rails' # Railsでlessを使えるようにする。Bootstrapがlessで書かれているため
-gem 'twitter-bootstrap-rails' # Bootstrapの本体
+gem 'therubyracer' # javascript runtime。lessをコンパイルするために必要
+
+gem 'bootstrap-sass' # Bootstrapの本体
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'

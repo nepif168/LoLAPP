@@ -1,8 +1,12 @@
 h1 アイテムセット一覧
 
 - @itemsets.each do |itemset|
-  li 
+  -if itemset.private
+    span class="glyphicon glyphicon-lock"
+      =link_to itemset.title, itemset_path(itemset)
+  -else
     =link_to itemset.title, itemset_path(itemset)
+  br
     
 p 
   = link_to "アイテムセットを作る", new_itemset_path    

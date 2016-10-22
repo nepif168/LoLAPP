@@ -5,7 +5,4 @@ class DatabasesController < ApplicationController
 
   def item
   end
-
-  def champion
-  end
 end

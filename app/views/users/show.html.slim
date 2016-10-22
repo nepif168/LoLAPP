@@ -1,0 +1,79 @@
+div class="row"
+  /画像と名前のボックス
+  div class="col-md-3"
+    div class="thumbnail"
+      =image_tag current_user.user_image
+      hr style="margin:3px"
+      div class="caption bg-success"
+        h4 class="text-center" #{@user.user_name}
+    -if current_user==@user
+      -if @profile.nil?
+        =link_to new_user_profile_path(@user), class: "btn btn-default" do
+          span class="glyphicon glyphicon-pencil"
+          |編集
+      -else
+        =link_to edit_user_profile_path(@user), class: "btn btn-default" do
+          span class="glyphicon glyphicon-pencil"
+          |編集
+  -unless @profile.nil?                
+    div class="col-md-9"
+      div class="panel panel-info"
+        div class="panel-heading" style="padding:5px"
+          /ここから自己紹介の中身
+          h4 class="text-center" プロフィール
+        table class="table table-bordered"
+          tbody
+            tr 
+              td サモナーネーム
+              td 
+                = @profile.summoner_name
+                a class="btn btn-info pull-right" target="_blank" href="#{'http://jp.op.gg/summoner/userName=' + @profile.summoner_name}" role="button" opggで確認する
+            tr
+              td width="200px" 自己紹介
+              td #{simple_format(@profile.content)}
+            tr
+              td 好きなチャンピオン
+              td
+                -unless @profile.champion1.blank?
+                  |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+@profile.champion1+".png"}" width="64px">
+                -unless @profile.champion2.blank?
+                  |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+@profile.champion2+".png"}" width="64px">
+                -unless @profile.champion3.blank?
+                  |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+@profile.champion3+".png"}" width="64px">
+                -if @user==current_user
+                  = link_to "チャンピオンを選ぶ", champion_select_user_profile_path(user_id: @user, id: @profile), class: "btn btn-warning pull-right"
+            tr
+              td 誕生日
+              td #{@profile.birthday}
+            tr
+              td リンク
+              td
+                -unless @profile.twitter_url.empty?
+                  a href="#{@profile.twitter_url}" target="_blank" class="btn btn-info"
+                    span class="glyphicon glyphicon-link" Twitter
+                    
+                -unless @profile.facebook_url.empty?
+                  a href="#{@profile.facebook_url}" target="_blank" class="btn btn-info"
+                    span class="glyphicon glyphicon-link" Facebook
+                    
+      div class="panel panel-info"
+        div class="panel-heading" style="padding:5px"
+          /ここからアイテムセット
+          h4 class="text-center" 投稿したアイテムセット
+        table class="table table-striped"
+          tr
+            th タイトル
+            th 最終更新日
+            th 
+          - @itemsets.each do |itemset|
+            tr
+              td #{itemset.title}
+              td #{itemset.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M')}
+              td
+                =link_to "確認する", itemset_path(itemset), class: "btn btn-primary btn-xs"
+      =link_to "...more", itemsetLists_user_path(current_user), class: "pull-right"
+        
+        
+        
+hr  
+p 現在のLoLのバージョンは#{$version}です

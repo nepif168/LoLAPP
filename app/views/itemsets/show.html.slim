@@ -1,28 +1,41 @@
-h1 アイテムリスト
 - if @itemset.favorited_by? current_user
-  = 'お気に入り登録されています'
-<br>
-- if @itemset.private
-  = "非公開です"
+  =link_to "お気に入りの解除", itemset_favorite_path(@itemset),class: "btn btn-danger", method: :delete
 - else
-  = "公開されています"
-h3
-  = @itemset.title
+  = link_to "お気に入りの登録", itemset_favorites_path(@itemset), class: "btn btn-success", method: :post
+br
+  
+- if @itemset.private
+  span class="glyphicon glyphicon-lock" aria-hidden="true" 
+
+h2 style="display:inline" #{@itemset.title}
+
 p
   = @itemset.content
-p  
-  = @itemset.champion
+
+p <img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+@itemset.champion+".png"}" width="64px">
+p #{$champion['data'][@itemset.champion]['name']}
+
+-unless @itemset.item0_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item0_id+".png"}" alt="#{@itemset.item0_id}" width="64px"
+-unless @itemset.item1_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item1_id+".png"}" alt="#{@itemset.item1_id}" width="64px"  
+-unless @itemset.item2_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item2_id+".png"}" alt="#{@itemset.item2_id}" width="64px"
+-unless @itemset.item3_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item3_id+".png"}" alt="#{@itemset.item3_id}" width="64px"
+-unless @itemset.item4_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item4_id+".png"}" alt="#{@itemset.item4_id}" width="64px"
+-unless @itemset.item5_id.blank?
+  img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/item/"+@itemset.item5_id+".png"}" alt="#{@itemset.item5_id}" width="64px"
+
+
   
 /img src="#{"http://ddragon.leagueoflegends.com/cdn/"+ $version +"/img/item/" + $item['data'][@itemset.item0_id]['image']['full']}"
 
 p 
-  = link_to "自分のアイテムリスト一覧に戻る", itemsets_path
-  <br />
+  = link_to "自分のアイテムリスト一覧に戻る", itemsetLists_user_path(current_user)
+  <br /> 
   
-  - if @itemset.favorited_by? current_user
-    = link_to "お気に入りの解除", itemset_favorite_path(@itemset), method: :delete
-  - else
-    = link_to "お気に入りの登録", itemset_favorites_path(@itemset), method: :post
 p
   - if @itemset.user_id == current_user.id
     = link_to "削除", itemset_path(@itemset), method: :delete, data: {confirm: "本当に削除しますか？"}

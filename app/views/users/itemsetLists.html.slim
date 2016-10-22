@@ -1,14 +1,18 @@
-h1 あなたの作ったアイテムセット一覧
-
-- @itemsets.each do |itemset|
-  li 
-    =link_to itemset.title, itemset_path(itemset)
-    
-p 
-  = link_to "アイテムセットを作る", new_itemset_path    
-p 
-  = link_to "お気に入り一覧", favorites_user_path(current_user)
-p 
-  = link_to "すべてのアイテムセットを見る", itemsets_path
+div class="panel panel-info"
+  div class="panel-heading" style="padding:5px"
+    h4 class="text-center" #{@user.user_name}さんの作ったアイテムセット
+  table class="table table-striped"
+    tr
+      th タイトル
+      th 最終更新日
+      th 
+    - @itemsets.each do |itemset|
+      tr
+        td #{itemset.title}
+        td #{itemset.updated_at.in_time_zone('Tokyo').strftime('%Y/%m/%d %H:%M')}
+        td
+          =link_to "確認する", itemset_path(itemset), class: "btn btn-primary btn-xs"
 
 = link_to "ホームに戻る", root_path
+br
+= link_to "アイテムセットを作る", new_itemset_path

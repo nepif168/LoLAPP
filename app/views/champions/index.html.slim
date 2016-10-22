@@ -1,0 +1,23 @@
+= javascript_include_tag params[:controller]
+input type="text" value=""
+table class="table" id="TABLE1"
+  tbody
+    -count=0
+    -$champion['data'].each_key do |key|
+      -if count%5==0
+        = '<tr>'.html_safe
+      /ここからテーブルの中身
+      td style="border:none"
+        div class="panel panel-default" style="width:150px"
+          div class="panel-body"
+            center
+              =link_to champion_path(key)
+                |<img src="#{"http://ddragon.leagueoflegends.com/cdn/"+$version+"/img/champion/"+key+".png"}" width="64px">
+          div class="panel-footer"
+            center
+              label
+                =key
+      /テーブルの中身終了
+      -if count%5==4
+        = '</tr>' .html_safe
+      -count+=1
